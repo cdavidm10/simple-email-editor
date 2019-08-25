@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the emails created by the current user
+     *
+     * @var array
+     */
+    public function emails()
+    {
+        return $this->hasMany('App\Email');
+    }
 }

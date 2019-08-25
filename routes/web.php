@@ -14,7 +14,7 @@
 Route::get('/', function () {
 
     if (Auth::check()) {
-        return view('home');
+        return Redirect::to( 'home');
     } else {
         return view('welcome');
     }
@@ -24,3 +24,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

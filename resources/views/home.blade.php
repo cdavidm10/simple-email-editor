@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Welcome,
+
+                    @include('emails.list')
                 </div>
             </div>
         </div>
