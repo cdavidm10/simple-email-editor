@@ -16,6 +16,10 @@
 
                     Welcome,
 
+                    <div>
+                        <a style="margin: 19px;" href="{{ route('email.create')}}" class="btn btn-primary">New contact</a>
+                    </div>  
+
                     @include('emails.list')
                 </div>
             </div>

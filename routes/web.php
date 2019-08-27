@@ -25,3 +25,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/create', 'EmailController@create')->name('email.create');
+

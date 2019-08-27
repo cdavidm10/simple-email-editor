@@ -8,6 +8,7 @@ use App\Email;
 
 class EmailController extends Controller
 {
+
     /**
      * Show the form for creating a new resource.
      *
@@ -15,7 +16,7 @@ class EmailController extends Controller
      */
     public function create()
     {
-        //
+        return view('emails.create');
     }
 
     /**
@@ -60,7 +61,17 @@ class EmailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'subject'=>'required',
+            'body'=>'required'
+        ]);
+
+        $email = Contact::find($id);
+        $email->subject = $request->get('subject');
+        $email->subject = $request->get('subject');
+        $email->save();
+
+        return redirect('/')->with('success', 'Email updated!');
     }
 
     /**
@@ -71,6 +82,9 @@ class EmailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $email = Email::find($id);
+        $email->delete();
+
+        return redirect('/')->with('success', 'Email deleted!');
     }
 }
