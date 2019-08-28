@@ -49,7 +49,7 @@ class EmailController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('email.create', compact('id'));
     }
 
     /**
@@ -68,7 +68,7 @@ class EmailController extends Controller
 
         $email = Contact::find($id);
         $email->subject = $request->get('subject');
-        $email->subject = $request->get('subject');
+        $email->body = $request->get('body');
         $email->save();
 
         return redirect('/')->with('success', 'Email updated!');

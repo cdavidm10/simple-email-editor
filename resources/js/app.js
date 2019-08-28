@@ -13,3 +13,8 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+require('./components/EmailForm');
+require('./components/EditorEmailBody');
+
+require('bootstrap-table');
+import 'bootstrap-table/dist/bootstrap-table.css';

@@ -11,6 +11,8 @@
 |
 */
 
+use App\Email;
+
 Route::get('/', function () {
 
     if (Auth::check()) {
@@ -26,4 +28,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/create', 'EmailController@create')->name('email.create');
+
+Route::get('/edit/{id}', 'EmailController@edit')->name('email.edit');
+
+Route::get('/destroy/{id}', 'EmailController@destroy')->name('email.destroy');
 
