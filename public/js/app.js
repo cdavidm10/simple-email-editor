@@ -103869,16 +103869,57 @@ function (_React$Component) {
       });
     };
 
+    _this.handleKeyCommand = function (command) {
+      var newState = draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].handleKeyCommand(_this.state.editorState, command);
+
+      if (newState) {
+        _this.onChange(newState);
+
+        return 'handled';
+      }
+
+      return 'not-handled';
+    };
+
+    _this.onUnderlineClick = function () {
+      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'UNDERLINE'));
+
+      event.preventDefault();
+    };
+
+    _this.onBoldClick = function () {
+      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'BOLD'));
+
+      event.preventDefault();
+    };
+
+    _this.onItalicClick = function () {
+      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'ITALIC'));
+
+      event.preventDefault();
+    };
+
     return _this;
   }
 
   _createClass(EditorEmailBody, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(draft_js__WEBPACK_IMPORTED_MODULE_2__["Editor"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "editorContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.onUnderlineClick
+      }, "U"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.onBoldClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.onItalicClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "I")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "editors"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(draft_js__WEBPACK_IMPORTED_MODULE_2__["Editor"], {
         editorState: this.state.editorState,
+        handleKeyCommand: this.handleKeyCommand,
         onChange: this.onChange
-      });
+      })));
     }
   }]);
 
@@ -103989,7 +104030,7 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "email-body",
         className: "grey-text"
-      }, " Your message "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "email-body"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center mt-4"
