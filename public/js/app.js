@@ -103815,7 +103815,7 @@ if (token) {
 /*!****************************************************!*\
   !*** ./resources/js/components/EditorEmailBody.js ***!
   \****************************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103836,9 +103836,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -103860,73 +103860,88 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditorEmailBody).call(this, props));
     _this.state = {
+      value: '',
+      hasText: false,
       editorState: draft_js__WEBPACK_IMPORTED_MODULE_2__["EditorState"].createEmpty()
     };
-
-    _this.onChange = function (editorState) {
-      return _this.setState({
-        editorState: editorState
-      });
-    };
-
-    _this.handleKeyCommand = function (command) {
-      var newState = draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].handleKeyCommand(_this.state.editorState, command);
-
-      if (newState) {
-        _this.onChange(newState);
-
-        return 'handled';
-      }
-
-      return 'not-handled';
-    };
-
-    _this.onUnderlineClick = function () {
-      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'UNDERLINE'));
-
-      event.preventDefault();
-    };
-
-    _this.onBoldClick = function () {
-      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'BOLD'));
-
-      event.preventDefault();
-    };
-
-    _this.onItalicClick = function () {
-      _this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(_this.state.editorState, 'ITALIC'));
-
-      event.preventDefault();
-    };
-
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.handleKeyCommand = _this.handleKeyCommand.bind(_assertThisInitialized(_this));
+    _this.onUnderlineClick = _this.onUnderlineClick.bind(_assertThisInitialized(_this));
+    _this.onBoldClick = _this.onBoldClick.bind(_assertThisInitialized(_this));
+    _this.onItalicClick = _this.onItalicClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(EditorEmailBody, [{
+    key: "onChange",
+    value: function onChange(editorState) {
+      var value = JSON.stringify(Object(draft_js__WEBPACK_IMPORTED_MODULE_2__["convertToRaw"])(editorState.getCurrentContent()));
+      var hasText = this.state.editorState.getCurrentContent().hasText();
+      this.setState({
+        value: value,
+        hasText: hasText,
+        editorState: editorState
+      });
+    }
+  }, {
+    key: "handleKeyCommand",
+    value: function handleKeyCommand(command) {
+      var newState = draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].handleKeyCommand(this.state.editorState, command);
+
+      if (newState) {
+        this.onChange(newState);
+        return 'handled';
+      }
+
+      return 'not-handled';
+    }
+  }, {
+    key: "onUnderlineClick",
+    value: function onUnderlineClick() {
+      this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(this.state.editorState, 'UNDERLINE'));
+      event.preventDefault();
+    }
+  }, {
+    key: "onBoldClick",
+    value: function onBoldClick() {
+      this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(this.state.editorState, 'BOLD'));
+      event.preventDefault();
+    }
+  }, {
+    key: "onItalicClick",
+    value: function onItalicClick() {
+      this.onChange(draft_js__WEBPACK_IMPORTED_MODULE_2__["RichUtils"].toggleInlineStyle(this.state.editorState, 'ITALIC'));
+      event.preventDefault();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "editorContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "editors"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "editors-btns"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.onUnderlineClick
       }, "U"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.onBoldClick
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "B")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.onItalicClick
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "I")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "editors"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "I"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "editors-editor"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(draft_js__WEBPACK_IMPORTED_MODULE_2__["Editor"], {
         editorState: this.state.editorState,
         handleKeyCommand: this.handleKeyCommand,
         onChange: this.onChange
-      })));
+      }))));
     }
   }]);
 
   return EditorEmailBody;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EditorEmailBody, null), document.getElementById('email-body'));
+/* harmony default export */ __webpack_exports__["default"] = (EditorEmailBody);
 
 /***/ }),
 
@@ -103945,7 +103960,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _EditorEmailBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditorEmailBody */ "./resources/js/components/EditorEmailBody.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -103967,6 +103987,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+ // Import a component from another file
+
 var EmailForm =
 /*#__PURE__*/
 function (_Component) {
@@ -103979,26 +104001,70 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EmailForm).call(this, props));
     _this.state = {
-      value: ''
+      subject: '',
+      body: '',
+      errors: []
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this)); // this.showError = this.showError.bind(this);
+    // this.hasErrorFor = this.hasErrorFor.bind(this);
+
+    _this.goBackClick = _this.goBackClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(EmailForm, [{
     key: "handleChange",
     value: function handleChange(event) {
-      this.setState({
-        value: event.target.value
-      });
+      event.preventDefault();
+      this.setState(_defineProperty({}, event.target.id, event.target.value));
+    }
+  }, {
+    key: "goBackClick",
+    value: function goBackClick(event) {
+      event.preventDefault();
+      window.location.href = '/';
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
+      var _this2 = this;
+
+      event.preventDefault(); // if(validateForm(this.state.errors)) {
+      //     console.info('Valid Form')
+      // }else{
+      //     console.error('Invalid Form')
+      // }
+
+      var email = {
+        subject: this.state.subject,
+        body: 'Esta es una prueba desde REACT'
+      };
+      console.log(email);
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/store', email).then(function (response) {
+        // redirect to the emails listing main page
+        console.log(response);
+        window.location.href = '/';
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.setState({
+          errors: error.response.data.errors
+        });
+      });
+    } // hasErrorFor(field) {
+    //     return !!this.state.errors[field]
+    // }
+    // showError(field) {
+    //     if (this.hasErrorFor(field)) {
+    //         return (
+    //         <span className='invalid-feedback'>
+    //             <strong>{this.state.errors[field][0]}</strong>
+    //         </span>
+    //         )
+    //     }
+    // }
+
   }, {
     key: "render",
     value: function render() {
@@ -104019,30 +104085,30 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "email-subject",
+        htmlFor: "subject",
         className: "grey-text"
       }, "Subject"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        id: "email-subject",
+        id: "subject",
         className: "form-control",
-        value: this.state.value,
+        value: this.state.subject,
         onChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "email-body",
+        htmlFor: "body",
         className: "grey-text"
-      }, "Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "email-body"
+      }, "Body"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditorEmailBody__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        id: "body"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center mt-4"
+        className: "text-right mt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBBtn"], {
         color: "info",
         outline: true,
+        onClick: this.goBackClick
+      }, "Go Back"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBBtn"], {
+        color: "success",
+        outline: true,
         type: "submit"
-      }, "Send", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBIcon"], {
-        far: true,
-        icon: "paper-plane",
-        className: "ml-2"
-      })))))))));
+      }, "Send"))))))));
     }
   }]);
 

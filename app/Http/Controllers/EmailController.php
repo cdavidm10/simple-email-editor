@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 use App\Email;
 
 class EmailController extends Controller
@@ -16,7 +18,11 @@ class EmailController extends Controller
      */
     public function create()
     {
-        return view('emails.create');
+        if (Auth::check()) {
+            return view('emails.create');
+        } else {
+            return Redirect::to( 'home');
+        }       
     }
 
     /**
@@ -27,7 +33,24 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requiredData = $request->validate([
+            'subject' => 'required',
+            'body'    => 'required',
+        ]);
+
+        $email = Email::updateOrCreate(
+            [
+                'id' => $request->emailId
+            ],[
+                'subject' => $requiredData['subject'],
+                'body'    => $request->body,
+                'user_id' => Auth::user()->id
+            ]
+        );
+        return response()->json([
+           'message' => 'Email was successfully created',
+           'status'  => 200
+        ]);
     }
 
     /**

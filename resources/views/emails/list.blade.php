@@ -17,7 +17,6 @@
     data-search="true">
     <thead>
       <tr>
-        <th data-sortable="true" data-field="id">Email ID</th>
         <th data-field="subject">Subject</th>
         <th data-field="body">Body</th>
         <th>Actions</th>
@@ -26,9 +25,8 @@
     <tbody>
       @foreach($emails as $email)
           <tr>
-              <td data-sortable="true" data-field="id">Email ID</td>
-              <td data-field="subject">Email Subject</td>
-              <td data-field="body">Email Body</td>
+              <td data-field="subject">{{$email->subject}}</td>
+              <td data-field="body">{{$email->body}}</td>
               <td>
                 <div class="btn-group">
                   <a href="{{ route('email.edit',$email->id)}}" class="btn btn-primary">Edit</a>
