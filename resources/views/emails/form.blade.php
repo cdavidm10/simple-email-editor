@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <div id="new-email-form"></div>
+    <div id="email-form"></div>
 @endsection

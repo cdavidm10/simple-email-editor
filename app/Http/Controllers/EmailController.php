@@ -19,7 +19,7 @@ class EmailController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            return view('emails.create');
+            return view('emails.form');
         } else {
             return Redirect::to( 'home');
         }       
@@ -33,68 +33,48 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $requiredData = $request->validate([
+        $data = $request->validate([
             'subject' => 'required',
             'body'    => 'required',
         ]);
-
+        
         $email = Email::updateOrCreate(
             [
-                'id' => $request->emailId
+                'id' => $request->id
             ],[
-                'subject' => $requiredData['subject'],
-                'body'    => $request->body,
+                'subject' => $data['subject'],
+                'body'    => $data['body'],
                 'user_id' => Auth::user()->id
             ]
         );
-        return response()->json([
-           'message' => 'Email was successfully created',
-           'status'  => 200
-        ]);
+        return response()->json('Email was successfully created');
     }
 
     /**
-     * Display the specified resource.
+     * Get the email for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function get(Request $request)
     {
-        //
+        $email = Email::find($request->id);
+        return $email->toJson();;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Get the email for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        return view('email.create', compact('id'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'subject'=>'required',
-            'body'=>'required'
-        ]);
-
-        $email = Contact::find($id);
-        $email->subject = $request->get('subject');
-        $email->body = $request->get('body');
-        $email->save();
-
-        return redirect('/')->with('success', 'Email updated!');
+        if (Auth::check()) {
+            return view('emails.form');
+        } else {
+            return Redirect::to( 'home');
+        } 
     }
 
     /**

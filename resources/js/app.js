@@ -12,9 +12,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
 require('./components/EmailForm');
-require('./components/EditorEmailBody');
+require('./components/Router');
 
-require('bootstrap-table');
-import 'bootstrap-table/dist/bootstrap-table.css';
+// require('bootstrap-table');
+// import 'bootstrap-table/dist/bootstrap-table.css';

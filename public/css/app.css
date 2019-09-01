@@ -10664,3 +10664,7 @@ a.text-dark:focus {
   padding: 0.375rem 0.75rem;
 }
 
+.srv-validation-message {
+  color: #e64040;
+}
+

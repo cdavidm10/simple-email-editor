@@ -29,7 +29,9 @@ Route::get('/create', 'EmailController@create')->name('email.create');
 
 Route::post('/store', 'EmailController@store');
 
-Route::get('/edit/{id}', 'EmailController@edit')->name('email.edit');
+Route::post('/get', 'EmailController@get');
+
+Route::get('/edit/{id?}', 'EmailController@edit')->name('email.edit');
 
 Route::delete('/destroy/{id}', 'EmailController@destroy')->name('email.destroy');
 
