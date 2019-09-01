@@ -12,21 +12,20 @@
 @if(!$emails->isEmpty())
   <table
     data-toggle="table"
-    data-url="{{ $emails }}"
     data-pagination="true"
     data-search="true">
     <thead>
       <tr>
-        <th data-field="subject">Subject</th>
-        <th data-field="body">Body</th>
+        <th>Subject</th>
+        <th>Body</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       @foreach($emails as $email)
           <tr>
-              <td data-field="subject">{{$email->subject}}</td>
-              <td data-field="body">{{$email->body}}</td>
+              <td>{{$email->subject}}</td>
+              <td>{{$email->body}}</td>
               <td>
                 <div class="btn-group">
                   <a href="{{ route('email.edit',$email->id)}}" class="btn btn-outline-success">Edit</a>

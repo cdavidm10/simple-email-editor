@@ -15,5 +15,5 @@ require('./bootstrap');
 require('./components/EmailForm');
 require('./components/Router');
 
-// require('bootstrap-table');
-// import 'bootstrap-table/dist/bootstrap-table.css';
+require('bootstrap-table');
+import 'bootstrap-table/dist/bootstrap-table.css';
